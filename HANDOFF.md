@@ -80,8 +80,10 @@ Seed: `alice / alice123` · `bob / bob123`
 | `PARTN_PLAN.md` | Plan |
 | `TYPESCRIPT_DEVELOP_TEST_PARTN_CONTEXT.md` | Context |
 
-Study-app localStorage: `tdtN-sec-K`, `tdtN-theme`.  
+Study-app localStorage: `tdtN-sec-K`, `tdtN-theme`, `tdtN-font`.  
 Sentinels: `<!--PN-END-->`, `<!--PNI-END-->`, `<!--PNH-END-->`.
+
+**Study apps (lite):** ~100 lines each vs 400+ in sibling kits — progress bar, quizzes, theme, font size, focus mode, skip link. No XP/streak/flashcard panels (see `typescript-for-testers` for full shell).
 
 ---
 

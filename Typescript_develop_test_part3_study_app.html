@@ -9,6 +9,9 @@
 html.force-dark,html.force-dark body{--bg:#120d1f;--text:#e8dff5;--card:#1a1428;--muted:#9a8ab0;--border:#3d2f55}
 html.force-dark{color-scheme:dark}
 body{margin:0;font:16px/1.6 "Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--text);padding:16px 18px 48px;max-width:880px;margin-inline:auto}
+body.font-sm{font-size:14px} body.font-lg{font-size:18px}
+.skip-link{position:absolute;left:-9999px}
+.skip-link:focus{position:fixed;left:8px;top:8px;z-index:9999;background:#fff;color:var(--accent);padding:8px 14px;border-radius:6px;font-weight:700}
 .partnav{display:flex;gap:8px;flex-wrap:wrap;background:#4c1d95;color:#e2e8f0;padding:8px 12px;border-radius:8px;margin:6px 0 12px}
 .partnav a{color:#c4b5fd;text-decoration:none;font-weight:600}
 .partnav strong{color:#fff}
@@ -22,6 +25,11 @@ summary{cursor:pointer;font-weight:600}
 html.force-dark .quiz-correct{color:#68d391}
 #progressBar{background:#4c1d95;color:#e2e8f0;border-radius:8px;padding:10px 16px;font-weight:600;text-align:center}
 .mark button{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:6px 12px;font-weight:600;cursor:pointer}
+.toolbar{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 8px;align-items:center}
+.toolbar button,.theme-btn{padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);font-weight:600;cursor:pointer}
+body.focus-mode #progressBar,body.focus-mode .scope,body.focus-mode footer{display:none!important}
+#focusHint{display:none;background:#eef2ff;border:2px solid #5a67d8;border-radius:8px;padding:8px 14px;margin:6px 0;color:#3730a3;font-weight:600}
+html.force-dark #focusHint{background:#1a1a2e;color:#c7d2fe}
 .theme-btn{padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--card);cursor:pointer}
 pre{overflow:auto;background:var(--card);border:1px solid var(--border);padding:12px;border-radius:8px;font-size:14px}
 .certificate{text-align:center;border-color:#d69e2e}
@@ -31,12 +39,23 @@ footer{text-align:center;margin-top:28px;color:var(--muted);font-size:13px}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#progressBar">Skip to content</a>
 <div class="partnav"><a href="index.html">Hub</a><a href="Typescript_develop_test_part2_study_app.html">← 2 App</a><strong>3 Playwright TS</strong></div>
 <h1>TypeScript Develop + Test — Part 3</h1>
-<button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙 Dark mode</button>
+<button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle light/dark theme">🌙 Dark mode</button>
+<div class="toolbar">
+  <span style="font-weight:600">📐 Size:</span>
+  <button type="button" onclick="fontZoom(-1)" aria-label="Decrease text size">A−</button>
+  <button type="button" onclick="fontZoom(0)" aria-label="Reset text size">A</button>
+  <button type="button" onclick="fontZoom(1)" aria-label="Increase text size">A+</button>
+  <button type="button" onclick="collapseAll(true)">📖 Expand all</button>
+  <button type="button" onclick="collapseAll(false)">📕 Collapse all</button>
+  <button type="button" id="focusBtn" onclick="focusMode(this)" aria-pressed="false">🧘 Focus Mode</button>
+</div>
+<div id="focusHint">🧘 <strong>Focus Mode ON</strong> — progress bar and extras hidden.</div>
 <p>Playwright in TypeScript against your TaskBoard: E2E + API tests, typed helper, HTML report, GitHub Actions CI.</p>
 <div class="scope"><strong>Run tests:</strong> <code>npm test</code> · report: <code>npm run test:report</code> · deep E2E strategy → <a href="../playwright-essentials/index.html">Playwright Essentials</a></div>
-<div id="progressBar">📊 Progress: 0/8 sections (0%)</div>
+<div id="progressBar" role="status">📊 Progress: 0/8 sections (0%)</div>
 
 <h2 id="s1">1. Develop + test loop</h2>
 <div class="why">🚩 Same repo owns the app and the proof: change → manual check → <code>npm test</code> → push → CI artifact.</div>
@@ -87,14 +106,21 @@ footer{text-align:center;margin-top:28px;color:var(--muted);font-size:13px}
 <footer>Phase B complete — show work in <a href="../automation-portfolio/">automation-portfolio</a></footer>
 <script>
 (function(){
-  const TOTAL=8,PREFIX='tdt3-sec-';
+  const TOTAL=8,PREFIX='tdt3-sec-',THEME='tdt3-theme',FONT='tdt3-font';
   function done(){let n=0;for(let i=1;i<=TOTAL;i++)if(localStorage.getItem(PREFIX+i)==='1')n++;return n;}
   window.updateProgress=function(){const n=done();document.getElementById('progressBar').textContent='📊 Progress: '+n+'/'+TOTAL+' sections ('+Math.round(100*n/TOTAL)+'%)';
     const c=document.getElementById('cert');if(n>=TOTAL){c.classList.remove('locked');c.innerHTML='<h3>🏆 Phase B Complete!</h3><p>Develop + test in TypeScript — portfolio next.</p>';}};
   window.toggleSection=function(i){const k=PREFIX+i;localStorage.setItem(k,localStorage.getItem(k)==='1'?'0':'1');updateProgress();};
-  window.toggleTheme=function(){const d=document.documentElement.classList.toggle('force-dark');localStorage.setItem('tdt3-theme',d?'dark':'light');
+  window.toggleTheme=function(){const d=document.documentElement.classList.toggle('force-dark');localStorage.setItem(THEME,d?'dark':'light');
     document.getElementById('themeBtn').textContent=d?'☀️ Light mode':'🌙 Dark mode';};
-  if(localStorage.getItem('tdt3-theme')==='dark'||(!localStorage.getItem('tdt3-theme')&&matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('force-dark');document.getElementById('themeBtn').textContent='☀️ Light mode';}
+  window.fontZoom=function(dir){document.body.classList.remove('font-sm','font-lg');let cur=localStorage.getItem(FONT)||'md';
+    if(dir===0)cur='md';else if(dir<0)cur=cur==='lg'?'md':'sm';else cur=cur==='sm'?'md':'lg';
+    localStorage.setItem(FONT,cur);if(cur==='sm')document.body.classList.add('font-sm');if(cur==='lg')document.body.classList.add('font-lg');};
+  window.focusMode=function(btn){const on=document.body.classList.toggle('focus-mode');btn.setAttribute('aria-pressed',on?'true':'false');
+    document.getElementById('focusHint').style.display=on?'block':'none';if(on)collapseAll(false);};
+  window.collapseAll=function(open){document.querySelectorAll('details').forEach(d=>{d.open=!!open;});};
+  if(localStorage.getItem(THEME)==='dark'||(!localStorage.getItem(THEME)&&matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('force-dark');document.getElementById('themeBtn').textContent='☀️ Light mode';}
+  const savedFont=localStorage.getItem(FONT);if(savedFont==='sm')document.body.classList.add('font-sm');if(savedFont==='lg')document.body.classList.add('font-lg');
   updateProgress();
 })();
 </script>

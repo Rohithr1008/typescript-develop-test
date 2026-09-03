@@ -169,3 +169,5 @@ npm test
 4. Optional: push and download the CI artifact.
 
 **Next on the path:** deepen FE via HTML/CSS Parts 2–3 if needed · show work in [`automation-portfolio`](../automation-portfolio/) · keep using Playwright Essentials for advanced E2E topics.
+
+<!--P3-END-->

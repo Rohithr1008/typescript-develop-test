@@ -129,3 +129,5 @@ npm run test:report
 Break a seed title → red · fix → green · open report · optional CI artifact.
 
 <div class="footer">Phase B complete — develop + test loop in one repo ❤️</div>
+
+<!--P3I-END-->

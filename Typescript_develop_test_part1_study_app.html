@@ -9,6 +9,9 @@
 html.force-dark,html.force-dark body{--bg:#0d1420;--text:#dbe4ef;--card:#151f30;--muted:#8a9bb0;--border:#28374d}
 html.force-dark{color-scheme:dark}
 body{margin:0;font:16px/1.6 "Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--text);padding:16px 18px 48px;max-width:880px;margin-inline:auto}
+body.font-sm{font-size:14px} body.font-lg{font-size:18px}
+.skip-link{position:absolute;left:-9999px}
+.skip-link:focus{position:fixed;left:8px;top:8px;z-index:9999;background:#fff;color:var(--accent);padding:8px 14px;border-radius:6px;font-weight:700}
 .partnav{display:flex;gap:8px;flex-wrap:wrap;background:#1e3a5f;color:#e2e8f0;padding:8px 12px;border-radius:8px;margin:6px 0 12px}
 .partnav a{color:#7dd3fc;text-decoration:none;font-weight:600}
 .partnav strong{color:#fff}
@@ -22,6 +25,11 @@ summary{cursor:pointer;font-weight:600}
 html.force-dark .quiz-correct{color:#68d391}
 #progressBar{background:#1e3a5f;color:#e2e8f0;border-radius:8px;padding:10px 16px;font-weight:600;text-align:center}
 .mark button{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:6px 12px;font-weight:600;cursor:pointer}
+.toolbar{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 8px;align-items:center}
+.toolbar button,.theme-btn{padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);font-weight:600;cursor:pointer}
+body.focus-mode #progressBar,body.focus-mode .scope,body.focus-mode footer{display:none!important}
+#focusHint{display:none;background:#eef2ff;border:2px solid #5a67d8;border-radius:8px;padding:8px 14px;margin:6px 0;color:#3730a3;font-weight:600}
+html.force-dark #focusHint{background:#1a1a2e;color:#c7d2fe}
 .theme-btn{padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--card);cursor:pointer}
 pre{overflow:auto;background:var(--card);border:1px solid var(--border);padding:12px;border-radius:8px;font-size:14px}
 .certificate{text-align:center;border-color:#d69e2e}
@@ -31,12 +39,23 @@ footer{text-align:center;margin-top:28px;color:var(--muted);font-size:13px}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#progressBar">Skip to content</a>
 <div class="partnav"><a href="index.html">Hub</a><strong>1 Deeper TS</strong><a href="Typescript_develop_test_part2_study_app.html">2 App →</a><a href="Typescript_develop_test_part3_study_app.html">3 Test →</a></div>
 <h1>TypeScript Develop + Test — Part 1</h1>
-<button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙 Dark mode</button>
+<button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle light/dark theme">🌙 Dark mode</button>
+<div class="toolbar">
+  <span style="font-weight:600">📐 Size:</span>
+  <button type="button" onclick="fontZoom(-1)" aria-label="Decrease text size">A−</button>
+  <button type="button" onclick="fontZoom(0)" aria-label="Reset text size">A</button>
+  <button type="button" onclick="fontZoom(1)" aria-label="Increase text size">A+</button>
+  <button type="button" onclick="collapseAll(true)">📖 Expand all</button>
+  <button type="button" onclick="collapseAll(false)">📕 Collapse all</button>
+  <button type="button" id="focusBtn" onclick="focusMode(this)" aria-pressed="false">🧘 Focus Mode</button>
+</div>
+<div id="focusHint">🧘 <strong>Focus Mode ON</strong> — progress bar and extras hidden.</div>
 <p>Deeper TypeScript for builders: modules, async, generics, utilities, strict tsconfig, API unions, errors.</p>
 <div class="scope"><strong>Phase B.</strong> Thin <a href="../typescript-for-testers/index.html">typescript-for-testers</a> is not enough for TS-only develop jobs.</div>
-<div id="progressBar">📊 Progress: 0/8 sections (0%)</div>
+<div id="progressBar" role="status">📊 Progress: 0/10 sections (0%)</div>
 
 <h2 id="s1">1. Beyond thin TS</h2>
 <div class="why">🚩 Phase A = types for tests. Phase B = types for shipping an app you also test.</div>
@@ -76,18 +95,35 @@ footer{text-align:center;margin-top:28px;color:var(--muted);font-size:13px}
 <div class="why">🚩 <code>catch (e)</code> is <code>unknown</code>; API <code>code</code> helps tests branch.</div>
 <div class="mark"><button type="button" onclick="toggleSection(8)">Mark Complete</button></div>
 
-<div id="cert" class="certificate locked"><h3>🏆 Part 1 Certificate</h3><p>Complete all 8 sections to unlock.</p></div>
+<h2 id="s9">9. Practice &amp; pitfalls</h2>
+<div class="why">🚩 Exercises: <code>ApiResult&lt;string&gt;</code> for <code>"pong"</code> · safe <code>firstTask</code> · <code>UpdateTaskBody</code> with <code>Partial</code> + <code>Pick</code>.</div>
+<div class="quiz-box"><details><summary>Write <code>ApiResult&lt;string&gt;</code> for <code>"pong"</code></summary><p class="quiz-correct"><code>{ ok: true, data: "pong" }</code></p></details><details><summary>Bug: <code>ok: boolean</code> on both branches?</summary><p class="quiz-correct">Use literal <code>ok: true</code> / <code>ok: false</code>.</p></details></div>
+<div class="mark"><button type="button" onclick="toggleSection(9)">Mark Complete</button></div>
+
+<h2 id="s10">10. Challenges &amp; answers</h2>
+<div class="why">🚩 <code>unwrap&lt;T&gt;</code> throws on error · <code>Record&lt;TaskStatus, number&gt;</code> needs all keys · stable <code>code</code> helps tests.</div>
+<div class="quiz-box"><details><summary>C1 — <code>unwrap</code> on error?</summary><p class="quiz-correct">Throw with <code>code</code> + <code>error</code>.</p></details><details><summary>C3 — Why body <code>code</code> not just HTTP status?</summary><p class="quiz-correct">Typed stable assertions in TS/tests.</p></details></div>
+<div class="mark"><button type="button" onclick="toggleSection(10)">Mark Complete</button></div>
+
+<div id="cert" class="certificate locked"><h3>🏆 Part 1 Certificate</h3><p>Complete all 10 sections to unlock.</p></div>
 <footer>Part 1 → Part 2: run <code>npm start</code> on TaskBoard</footer>
 <script>
 (function(){
-  const TOTAL=8,PREFIX='tdt1-sec-';
+  const TOTAL=10,PREFIX='tdt1-sec-',THEME='tdt1-theme',FONT='tdt1-font';
   function done(){let n=0;for(let i=1;i<=TOTAL;i++)if(localStorage.getItem(PREFIX+i)==='1')n++;return n;}
   window.updateProgress=function(){const n=done();document.getElementById('progressBar').textContent='📊 Progress: '+n+'/'+TOTAL+' sections ('+Math.round(100*n/TOTAL)+'%)';
     const c=document.getElementById('cert');if(n>=TOTAL){c.classList.remove('locked');c.innerHTML='<h3>🏆 Part 1 Complete!</h3><p>Deeper TS foundations — open Part 2 study app.</p>';}};
   window.toggleSection=function(i){const k=PREFIX+i;localStorage.setItem(k,localStorage.getItem(k)==='1'?'0':'1');updateProgress();};
-  window.toggleTheme=function(){const d=document.documentElement.classList.toggle('force-dark');localStorage.setItem('tdt1-theme',d?'dark':'light');
+  window.toggleTheme=function(){const d=document.documentElement.classList.toggle('force-dark');localStorage.setItem(THEME,d?'dark':'light');
     document.getElementById('themeBtn').textContent=d?'☀️ Light mode':'🌙 Dark mode';};
-  if(localStorage.getItem('tdt1-theme')==='dark'||(!localStorage.getItem('tdt1-theme')&&matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('force-dark');document.getElementById('themeBtn').textContent='☀️ Light mode';}
+  window.fontZoom=function(dir){document.body.classList.remove('font-sm','font-lg');let cur=localStorage.getItem(FONT)||'md';
+    if(dir===0)cur='md';else if(dir<0)cur=cur==='lg'?'md':'sm';else cur=cur==='sm'?'md':'lg';
+    localStorage.setItem(FONT,cur);if(cur==='sm')document.body.classList.add('font-sm');if(cur==='lg')document.body.classList.add('font-lg');};
+  window.focusMode=function(btn){const on=document.body.classList.toggle('focus-mode');btn.setAttribute('aria-pressed',on?'true':'false');
+    document.getElementById('focusHint').style.display=on?'block':'none';if(on)collapseAll(false);};
+  window.collapseAll=function(open){document.querySelectorAll('details').forEach(d=>{d.open=!!open;});};
+  if(localStorage.getItem(THEME)==='dark'||(!localStorage.getItem(THEME)&&matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('force-dark');document.getElementById('themeBtn').textContent='☀️ Light mode';}
+  const savedFont=localStorage.getItem(FONT);if(savedFont==='sm')document.body.classList.add('font-sm');if(savedFont==='lg')document.body.classList.add('font-lg');
   updateProgress();
 })();
 </script>

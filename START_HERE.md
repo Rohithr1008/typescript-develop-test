@@ -54,7 +54,7 @@ Study materials work offline in the browser — no install required for the HTML
 | Deeper TypeScript | Thin tester TS ≠ TS develop jobs |
 | Small TS app | Practice shipping, not only reading types |
 | Playwright in TS | Typed E2E against *your* app |
-| CI | Lint/test/build on every push |
+| CI | Typecheck/test/build on every push |
 
 ---
 

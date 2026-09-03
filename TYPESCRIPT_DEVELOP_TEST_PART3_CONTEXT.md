@@ -6,7 +6,7 @@
 **Commands:** `npm test` · `npm run test:report`.  
 **Tests:** `tests/api/`, `tests/e2e/`, `tests/helpers/board.ts`.  
 **CI:** `.github/workflows/ci.yml` uploads `playwright-report/`.  
-**Storage keys (study app):** `tdt3-sec-N`, `tdt3-theme`, `tdt3-font`, `tdt3-boost`.  
-**Sentinel:** `<!--P3H-END-->`.
+**Storage keys (study app):** `tdt3-sec-N`, `tdt3-theme`, `tdt3-font`.  
+**Sentinels:** `<!--P3-END-->` · `<!--P3I-END-->` · `<!--P3H-END-->`.
 
 **Sideways links (do not re-teach):** `../typescript-for-testers/`, `../playwright-essentials/`, `../automation-portfolio/`.

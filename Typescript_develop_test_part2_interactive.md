@@ -140,3 +140,5 @@ npm run build && npm run start:dist
 3. Reset · run Part 3 `npm test`
 
 <div class="footer">Part 2 → Part 3 Playwright TS against this app</div>
+
+<!--P2I-END-->

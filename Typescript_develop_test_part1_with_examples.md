@@ -287,3 +287,5 @@ function unwrap<T>(r: ApiResult<T>): T {
 
 **Next:** Part 2 — build/run the TaskBoard app (`npm start`).  
 Hub: [`index.html`](index.html) · Thin TS refresher: [`../typescript-for-testers`](../typescript-for-testers/)
+
+<!--P1-END-->

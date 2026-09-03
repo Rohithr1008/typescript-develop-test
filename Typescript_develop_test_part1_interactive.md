@@ -165,11 +165,25 @@ type ApiResult<T> = { ok: true; data: T } | { ok: false; error: string; code: st
 
 ---
 
-## Practice spot-check
+## 9. Practice & pitfalls
+
+<div class="why">🚩 Exercises: <code>ApiResult&lt;string&gt;</code> for <code>"pong"</code> · safe <code>firstTask</code> under <code>noUncheckedIndexedAccess</code> · <code>UpdateTaskBody</code> with <code>Partial</code> + <code>Pick</code>.</div>
 
 <div class="quiz-box">
 <details><summary>Write a successful <code>ApiResult&lt;string&gt;</code> for <code>"pong"</code></summary><p class="quiz-correct"><code>{ ok: true, data: "pong" }</code></p></details>
 <details><summary>Spot the bug: <code>ok: boolean</code> on both branches</summary><p class="quiz-correct">Use literal <code>ok: true</code> / <code>ok: false</code> so narrowing works.</p></details>
 </div>
 
+---
+
+## 10. Challenges & answers
+
+<div class="quiz-box">
+<details><summary>C1 — Implement <code>unwrap&lt;T&gt;(r: ApiResult&lt;T&gt;): T</code> that throws on error</summary><p class="quiz-correct"><code>if (r.ok) return r.data; throw new Error(r.code + ": " + r.error);</code></p></details>
+<details><summary>C2 — <code>Record&lt;TaskStatus, number&gt;</code> with all three keys</summary><p class="quiz-correct"><code>{ todo: 0, doing: 1, done: 2 }</code></p></details>
+<details><summary>C3 — Why <code>{ ok: false, code, error }</code> instead of HTTP status only?</summary><p class="quiz-correct">Typed, stable body for clients/tests; <code>ok</code> narrows in TS.</p></details>
+</div>
+
 <div class="footer">Part 1 complete → open Part 2 and run <code>npm start</code> on the TaskBoard.</div>
+
+<!--P1I-END-->

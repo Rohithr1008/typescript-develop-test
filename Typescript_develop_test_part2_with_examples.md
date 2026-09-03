@@ -171,3 +171,5 @@ Health check: `GET /api/health` → `{ ok: true, data: { status: "up", … } }`.
 
 **Next:** Part 3 — Playwright in TypeScript against this app.  
 Links: [Playwright Essentials](../playwright-essentials/) (strategy) · [automation-portfolio](../automation-portfolio/) (show work)
+
+<!--P2-END-->
