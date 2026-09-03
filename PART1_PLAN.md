@@ -1,26 +1,43 @@
 # PART 1 — Deeper TypeScript (Plan)
 
-> **Status:** 🚧 Placeholder only. Kit is **STUB / planned**. Fill when Phase B Part 1 is scoped.
+> **Status:** ✅ Built — three editions shipped.
 
-## Goal (draft)
+## Goal
 
-Move past thin “types for test code” into develop-oriented TypeScript: modules, tooling, and patterns needed to ship a small app (Parts 2–4).
+Move past thin “types for test code” into **develop-oriented TypeScript**: modules, async typing, light generics/utilities, strict tsconfig, discriminated unions for API responses, and error typing — enough to ship Part 2’s TaskBoard.
 
-## Audience (draft)
+## Audience
 
 - Completed Phase A thin kit ([`typescript-for-testers`](../typescript-for-testers/)) **or** equivalent  
 - Comfortable with JE foundations; aiming at develop+test, not automation-hire-only  
 
-## Sections
+## Sections (10)
 
-_TBD — do not invent a full curriculum here._
+1. Beyond thin TS — why this kit  
+2. Modules (`import`/`export`, NodeNext)  
+3. Async & Promise typing  
+4. Generics (light)  
+5. Utility types (light): `Partial`, `Pick`, `Omit`, `Record`  
+6. Strict `tsconfig` habits  
+7. Discriminated unions for API responses  
+8. Error typing (`unknown`, narrow, custom codes)  
+9. Practice + pitfalls  
+10. Challenges + answer key  
 
-## Deliverables (when built)
+## Deliverables
 
-- `PART1_PLAN.md` (this file, completed)  
-- Three editions + context doc (naming TBD to match siblings)  
-- Hub / README updates  
+| File | Role |
+|---|---|
+| `Typescript_develop_test_part1_with_examples.md` | Plain / print |
+| `Typescript_develop_test_part1_interactive.md` | VS Code preview quizzes |
+| `Typescript_develop_test_part1_study_app.html` | Offline study app |
+| `TYPESCRIPT_DEVELOP_TEST_PART1_CONTEXT.md` | Transfer notes |
+
+## Out of scope
+
+- Full React/Next curriculum  
+- Re-teaching thin tester TS or Playwright pedagogy from scratch  
 
 ---
 
-_Stub placeholder — WS3b._
+_Phase B Part 1 — BUILT._

@@ -9,10 +9,13 @@ Desktop.ini
 *.swp
 *~
 
-# Node (when curriculum lands)
+# Node
 node_modules/
 dist/
 coverage/
 test-results/
 playwright-report/
+blob-report/
+playwright/.cache/
 .auth/
+*.tsbuildinfo

@@ -1,8 +1,9 @@
 # START HERE — TypeScript Develop + Test
 
-Calm entry for **Phase B**. This kit is a **stub** — content comes later.
+Calm entry for **Phase B**. Three parts: deeper TS → TaskBoard app → Playwright in TS + CI.
 
-**Path plan:** [`../automation-tester-path/ROADMAP.md`](../automation-tester-path/ROADMAP.md) · **Map:** [`../automation-tester-path/README.md`](../automation-tester-path/README.md)
+**Path plan:** [`../automation-tester-path/ROADMAP.md`](../automation-tester-path/ROADMAP.md) · **Map:** [`../automation-tester-path/README.md`](../automation-tester-path/README.md)  
+**Hub:** [`index.html`](index.html)
 
 ---
 
@@ -19,27 +20,45 @@ Finish **Phase A** first (or know you can skip):
 Then Phase B:
 
 6. HTML & CSS Parts 2–3 (deeper FE)  
-7. **This kit** — deeper TS · small TS app · Playwright in TS · CI  
+7. **This kit** — deeper TS · TaskBoard app · Playwright in TS · CI  
 
 ---
 
-## What you will get here (when built)
+## Study order (this kit)
 
-| Chunk | Why |
+| Step | Part | What you do |
+|---|---|---|
+| 1 | **Part 1** — Deeper TypeScript | Modules, async, generics, utilities, strict tsconfig, API unions, errors |
+| 2 | **Part 2** — TaskBoard app | Read + run `npm start` · explore typed CRUD + vanilla UI |
+| 3 | **Part 3** — Playwright in TS | `npm test` · read helpers/API tests · skim CI workflow |
+
+Open [`index.html`](index.html) and pick a study app, or preview `.md` files in VS Code (`Ctrl+Shift+V`).
+
+---
+
+## Run the lab
+
+```bash
+npm install
+npx playwright install chromium   # first time only
+
+npm start          # http://localhost:3847 — alice/alice123 · bob/bob123
+npm test           # E2E + API tests (starts server automatically)
+npm run test:report
+```
+
+Study materials work offline. The lab needs Node 18+.
+
+---
+
+## Scope reminder
+
+| This kit | Not this kit |
 |---|---|
-| Deeper TypeScript | Thin tester TS ≠ TS develop jobs |
-| Small TS app | Practice shipping, not only reading types |
-| Playwright in TS | Typed E2E against *your* app |
-| CI | Lint/test/build on every push |
+| Develop-oriented TS + small app + TS tests | Thin tester TS (`typescript-for-testers`) |
+| Light Playwright wiring against *your* app | Full Playwright pedagogy (`playwright-essentials`) |
+| CI snippet mirroring portfolio pattern | React/Next bootcamp |
 
 ---
 
-## Right now
-
-- Status: **STUB / planned** — see [`HANDOFF.md`](HANDOFF.md)  
-- Optional placeholder: [`PART1_PLAN.md`](PART1_PLAN.md)  
-- Do not expect study apps or full curriculum in this repo yet  
-
----
-
-*Read the path ROADMAP → finish Phase A / HTML-CSS 2–3 → return when this kit ships.*
+*Read a little → run the app → write/fix a test → next part when ready.*

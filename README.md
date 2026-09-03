@@ -1,11 +1,11 @@
 # TypeScript Develop + Test
 
-**Status:** 🚧 **STUB / planned** — Phase B kit on the [Automation Tester Path](../automation-tester-path/README.md). Curriculum not built yet.
+**Status:** ✅ **Built** — Phase B kit on the [Automation Tester Path](../automation-tester-path/README.md).
 
 For learners who finished **Phase A** (JE → HTML/CSS Part 1 → thin TS → Playwright → harden/API/perf/portfolio) and want **develop + test** depth in TypeScript — not the thin “types for test code” kit alone.
 
 **Path map:** [`../automation-tester-path/README.md`](../automation-tester-path/README.md) · [`ROADMAP`](../automation-tester-path/ROADMAP.md) · [`START_HERE` (path)](../automation-tester-path/START_HERE.md)  
-**This kit:** [`START_HERE.md`](START_HERE.md) · [`HANDOFF.md`](HANDOFF.md)
+**This kit:** [`START_HERE.md`](START_HERE.md) · [`HANDOFF.md`](HANDOFF.md) · **Hub:** [`index.html`](index.html)
 
 ---
 
@@ -20,29 +20,58 @@ For learners who finished **Phase A** (JE → HTML/CSS Part 1 → thin TS → Pl
 
 ---
 
-## Planned parts (outline only)
+## Parts (3 × three editions)
 
-| Part | Focus | Notes |
+| Part | Focus | Study app |
 |---|---|---|
-| **1** | Deeper TypeScript | Types, modules, tooling beyond the thin tester kit |
-| **2** | Small TypeScript app | Build a tiny real app (not curriculum dump) |
-| **3** | Playwright in TypeScript | E2E against that app, typed fixtures/POM habits |
-| **4** | CI | Lint/test/build on push (GitHub Actions) |
+| **1** | Deeper TypeScript | [Open](Typescript_develop_test_part1_study_app.html) |
+| **2** | TaskBoard mini-app | [Open](Typescript_develop_test_part2_study_app.html) |
+| **3** | Playwright in TypeScript + CI | [Open](Typescript_develop_test_part3_study_app.html) |
 
-Same pedagogy target as sibling kits (ADHD/autistic-friendly, three editions) — **when built**. This repo is a placeholder so the path can link here.
+Each part ships three editions:
+
+| Edition | Best for | Part 1 | Part 2 | Part 3 |
+|---|---|---|---|---|
+| Study app | Offline browser — progress, quizzes, certificate | [App](Typescript_develop_test_part1_study_app.html) | [App](Typescript_develop_test_part2_study_app.html) | [App](Typescript_develop_test_part3_study_app.html) |
+| Interactive Markdown | VS Code preview (`Ctrl+Shift+V`) | [MD](Typescript_develop_test_part1_interactive.md) | [MD](Typescript_develop_test_part2_interactive.md) | [MD](Typescript_develop_test_part3_interactive.md) |
+| Plain Markdown | Print / PDF / distraction-free | [Plain](Typescript_develop_test_part1_with_examples.md) | [Plain](Typescript_develop_test_part2_with_examples.md) | [Plain](Typescript_develop_test_part3_with_examples.md) |
 
 ---
 
-## Quick open
-
-1. Read [`START_HERE.md`](START_HERE.md) for the calm Phase B order.  
-2. Agents / next session: [`HANDOFF.md`](HANDOFF.md) (status = STUB).  
-3. Path execution plan: [`../automation-tester-path/ROADMAP.md`](../automation-tester-path/ROADMAP.md).
+## Runnable TaskBoard (Part 2)
 
 ```bash
 git clone https://github.com/Rohithr1008/typescript-develop-test.git
+cd typescript-develop-test
+npm install
+npm start          # http://localhost:3847
 ```
+
+Seed logins: `alice / alice123` · `bob / bob123`
 
 ---
 
-*Stub only — no full curriculum yet. Thin TS for automation hire path → [`typescript-for-testers`](../typescript-for-testers/).*
+## Playwright tests (Part 3)
+
+```bash
+npm test                 # starts app + runs 8 tests (API + E2E)
+npm run test:report      # open HTML report locally
+npm run build            # tsc + copy public → dist
+```
+
+CI: `.github/workflows/ci.yml` — build + Playwright on push/PR, uploads `playwright-report` artifact.
+
+---
+
+## Hub files
+
+| File | Purpose |
+|---|---|
+| [`START_HERE.md`](START_HERE.md) | First open |
+| [`HANDOFF.md`](HANDOFF.md) | Conventions for humans/agents |
+| [`PART1_PLAN.md`](PART1_PLAN.md) / [`PART2_PLAN.md`](PART2_PLAN.md) / [`PART3_PLAN.md`](PART3_PLAN.md) | Section plans |
+| [`index.html`](index.html) | Offline hub |
+
+---
+
+*Phase B complete — deeper TS, real app, typed Playwright tests, CI. Thin TS for automation hire path → [`typescript-for-testers`](../typescript-for-testers/).*

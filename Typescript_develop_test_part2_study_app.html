@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TypeScript Develop + Test — Part 2</title>
+<style>
+:root{--accent:#0f766e;--bg:#f0f7f4;--text:#14241c;--card:#fff;--muted:#5b7168;--border:#c5ddd4}
+html.force-dark,html.force-dark body{--bg:#0c1612;--text:#d8ebe2;--card:#12201a;--muted:#8a9e94;--border:#243830}
+html.force-dark{color-scheme:dark}
+body{margin:0;font:16px/1.6 "Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--text);padding:16px 18px 48px;max-width:880px;margin-inline:auto}
+.partnav{display:flex;gap:8px;flex-wrap:wrap;background:#134e4a;color:#e2e8f0;padding:8px 12px;border-radius:8px;margin:6px 0 12px}
+.partnav a{color:#5eead4;text-decoration:none;font-weight:600}
+.partnav strong{color:#fff}
+h1{color:var(--accent)} h2{border-bottom:3px solid var(--accent);padding-bottom:6px;margin-top:2rem}
+.why{background:#e6fffa;border-left:4px solid var(--accent);padding:6px 12px;border-radius:6px;margin:6px 0 10px;font-size:.92rem}
+html.force-dark .why{background:#0f1f1c}
+.quiz-box,.panel,.certificate{background:var(--card);border:2px solid var(--border);border-radius:12px;padding:14px 18px;margin:14px 0}
+.quiz-box details{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.quiz-correct{color:#276749;font-weight:700}
+html.force-dark .quiz-correct{color:#68d391}
+#progressBar{background:#134e4a;color:#e2e8f0;border-radius:8px;padding:10px 16px;font-weight:600;text-align:center}
+.mark button{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:6px 12px;font-weight:600;cursor:pointer}
+.theme-btn{padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--card);cursor:pointer}
+pre{overflow:auto;background:var(--card);border:1px solid var(--border);padding:12px;border-radius:8px;font-size:14px}
+.certificate{text-align:center;border-color:#d69e2e}
+.certificate.locked{opacity:.75}
+.scope{background:#fff7ed;border:1px solid #fdba74;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:.95rem}
+.runbox{background:#eff6ff;border:1px solid #93c5fd;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:.95rem}
+footer{text-align:center;margin-top:28px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<div class="partnav"><a href="index.html">Hub</a><a href="Typescript_develop_test_part1_study_app.html">← 1 TS</a><strong>2 TaskBoard</strong><a href="Typescript_develop_test_part3_study_app.html">3 Test →</a></div>
+<h1>TypeScript Develop + Test — Part 2</h1>
+<button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙 Dark mode</button>
+<p>Ship and study a real Express + TypeScript TaskBoard: auth, typed CRUD, deterministic seed, vanilla UI.</p>
+<div class="scope"><strong>Phase B.</strong> Run the app — not study-app-only: <code>npm install</code> · <code>npm start</code> → <a href="http://localhost:3847">localhost:3847</a></div>
+<div class="runbox"><strong>Seed logins:</strong> <code>alice / alice123</code> · <code>bob / bob123</code></div>
+<div id="progressBar">📊 Progress: 0/8 sections (0%)</div>
+
+<h2 id="s1">1. Why a tiny real app</h2>
+<div class="why">🚩 Reading types ≠ shipping. TaskBoard gives Playwright something real to hit.</div>
+<div class="quiz-box"><details><summary>Default port?</summary><p class="quiz-correct">3847</p></details><details><summary>Why in-memory store?</summary><p class="quiz-correct">Simple demos + deterministic Playwright resets.</p></details></div>
+<div class="mark"><button type="button" onclick="toggleSection(1)">Mark Complete</button></div>
+
+<h2 id="s2">2. Layout &amp; tsconfig</h2>
+<div class="why">🚩 Routes in <code>src/server.ts</code>; <code>tsc</code> alone does not copy HTML — <code>scripts/copy-public.mjs</code> does.</div>
+<pre><code>src/types.ts · store.ts · seed.ts · auth.ts · server.ts · public/</code></pre>
+<div class="quiz-box"><details><summary>Where do routes live?</summary><p class="quiz-correct">src/server.ts</p></details></div>
+<div class="mark"><button type="button" onclick="toggleSection(2)">Mark Complete</button></div>
+
+<h2 id="s3">3. Domain types &amp; API unions</h2>
+<div class="why">🚩 Every JSON response is <code>ApiResult&lt;T&gt;</code> — branch on <code>ok</code>.</div>
+<pre><code>type ApiResult&lt;T&gt; = { ok: true; data: T } | { ok: false; error: string; code: string };</code></pre>
+<div class="quiz-box"><details><summary>Discriminant field?</summary><p class="quiz-correct">ok</p></details><details><summary>Allowed task statuses?</summary><p class="quiz-correct">todo, doing, done</p></details></div>
+<div class="mark"><button type="button" onclick="toggleSection(3)">Mark Complete</button></div>
+
+<h2 id="s4">4. Auth + CRUD routes</h2>
+<div class="why">🚩 <code>Authorization: Bearer &lt;token&gt;</code> — tasks are owner-scoped.</div>
+<div class="quiz-box"><details><summary>Can Bob list Alice's tasks?</summary><p class="quiz-correct">No — filtered by ownerId.</p></details></div>
+<div class="mark"><button type="button" onclick="toggleSection(4)">Mark Complete</button></div>
+
+<h2 id="s5">5. Deterministic seed</h2>
+<div class="why">🚩 Fixed users/tasks/timestamps — <code>POST /api/reset</code> restores seed for tests.</div>
+<div class="quiz-box"><details><summary>How many tasks after seed?</summary><p class="quiz-correct">4 total (Alice 3, Bob 1).</p></details></div>
+<div class="mark"><button type="button" onclick="toggleSection(5)">Mark Complete</button></div>
+
+<h2 id="s6">6. Vanilla UI ↔ API</h2>
+<div class="why">🚩 Token in <code>localStorage</code>; three columns (todo/doing/done); locators like <code>#loginBtn</code>, <code>.task</code>.</div>
+<div class="quiz-box"><details><summary>Which button adds a task?</summary><p class="quiz-correct">#addBtn</p></details></div>
+<div class="mark"><button type="button" onclick="toggleSection(6)">Mark Complete</button></div>
+
+<h2 id="s7">7. Run / build checklist</h2>
+<div class="why">🚩 Dev: <code>npm start</code> (tsx). Prod-ish: <code>npm run build</code> then <code>npm run start:dist</code>.</div>
+<pre><code>npm install
+npm start
+npm run build
+GET /api/health → { ok: true, data: { status: "up", … } }</code></pre>
+<div class="mark"><button type="button" onclick="toggleSection(7)">Mark Complete</button></div>
+
+<h2 id="s8">8. Practice → Part 3</h2>
+<div class="why">🚩 Log in as alice, add/move a task; log in as bob; call reset; then open Part 3 and run <code>npm test</code>.</div>
+<div class="mark"><button type="button" onclick="toggleSection(8)">Mark Complete</button></div>
+
+<div id="cert" class="certificate locked"><h3>🏆 Part 2 Certificate</h3><p>Complete all 8 sections to unlock.</p></div>
+<footer>Part 2 → Part 3: <code>npm test</code> (Playwright in TypeScript)</footer>
+<script>
+(function(){
+  const TOTAL=8,PREFIX='tdt2-sec-';
+  function done(){let n=0;for(let i=1;i<=TOTAL;i++)if(localStorage.getItem(PREFIX+i)==='1')n++;return n;}
+  window.updateProgress=function(){const n=done();document.getElementById('progressBar').textContent='📊 Progress: '+n+'/'+TOTAL+' sections ('+Math.round(100*n/TOTAL)+'%)';
+    const c=document.getElementById('cert');if(n>=TOTAL){c.classList.remove('locked');c.innerHTML='<h3>🏆 Part 2 Complete!</h3><p>TaskBoard shipped — open Part 3 study app.</p>';}};
+  window.toggleSection=function(i){const k=PREFIX+i;localStorage.setItem(k,localStorage.getItem(k)==='1'?'0':'1');updateProgress();};
+  window.toggleTheme=function(){const d=document.documentElement.classList.toggle('force-dark');localStorage.setItem('tdt2-theme',d?'dark':'light');
+    document.getElementById('themeBtn').textContent=d?'☀️ Light mode':'🌙 Dark mode';};
+  if(localStorage.getItem('tdt2-theme')==='dark'||(!localStorage.getItem('tdt2-theme')&&matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('force-dark');document.getElementById('themeBtn').textContent='☀️ Light mode';}
+  updateProgress();
+})();
+</script>
+<!--P2H-END-->
+</body>
+</html>

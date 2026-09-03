@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TypeScript Develop + Test — Part 3</title>
+<style>
+:root{--accent:#7c3aed;--bg:#f5f0ff;--text:#1a1033;--card:#fff;--muted:#6b5b80;--border:#d4c5e8}
+html.force-dark,html.force-dark body{--bg:#120d1f;--text:#e8dff5;--card:#1a1428;--muted:#9a8ab0;--border:#3d2f55}
+html.force-dark{color-scheme:dark}
+body{margin:0;font:16px/1.6 "Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--text);padding:16px 18px 48px;max-width:880px;margin-inline:auto}
+.partnav{display:flex;gap:8px;flex-wrap:wrap;background:#4c1d95;color:#e2e8f0;padding:8px 12px;border-radius:8px;margin:6px 0 12px}
+.partnav a{color:#c4b5fd;text-decoration:none;font-weight:600}
+.partnav strong{color:#fff}
+h1{color:var(--accent)} h2{border-bottom:3px solid var(--accent);padding-bottom:6px;margin-top:2rem}
+.why{background:#ede9fe;border-left:4px solid var(--accent);padding:6px 12px;border-radius:6px;margin:6px 0 10px;font-size:.92rem}
+html.force-dark .why{background:#1e1533}
+.quiz-box,.panel,.certificate{background:var(--card);border:2px solid var(--border);border-radius:12px;padding:14px 18px;margin:14px 0}
+.quiz-box details{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.quiz-correct{color:#276749;font-weight:700}
+html.force-dark .quiz-correct{color:#68d391}
+#progressBar{background:#4c1d95;color:#e2e8f0;border-radius:8px;padding:10px 16px;font-weight:600;text-align:center}
+.mark button{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:6px 12px;font-weight:600;cursor:pointer}
+.theme-btn{padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--card);cursor:pointer}
+pre{overflow:auto;background:var(--card);border:1px solid var(--border);padding:12px;border-radius:8px;font-size:14px}
+.certificate{text-align:center;border-color:#d69e2e}
+.certificate.locked{opacity:.75}
+.scope{background:#fff7ed;border:1px solid #fdba74;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:.95rem}
+footer{text-align:center;margin-top:28px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<div class="partnav"><a href="index.html">Hub</a><a href="Typescript_develop_test_part2_study_app.html">← 2 App</a><strong>3 Playwright TS</strong></div>
+<h1>TypeScript Develop + Test — Part 3</h1>
+<button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙 Dark mode</button>
+<p>Playwright in TypeScript against your TaskBoard: E2E + API tests, typed helper, HTML report, GitHub Actions CI.</p>
+<div class="scope"><strong>Run tests:</strong> <code>npm test</code> · report: <code>npm run test:report</code> · deep E2E strategy → <a href="../playwright-essentials/index.html">Playwright Essentials</a></div>
+<div id="progressBar">📊 Progress: 0/8 sections (0%)</div>
+
+<h2 id="s1">1. Develop + test loop</h2>
+<div class="why">🚩 Same repo owns the app and the proof: change → manual check → <code>npm test</code> → push → CI artifact.</div>
+<div class="quiz-box"><details><summary>Who starts the app during npm test?</summary><p class="quiz-correct">Playwright webServer (npm start).</p></details><details><summary>Why beforeEach reset?</summary><p class="quiz-correct">Deterministic state; no cross-test pollution.</p></details></div>
+<div class="mark"><button type="button" onclick="toggleSection(1)">Mark Complete</button></div>
+
+<h2 id="s2">2. Link map</h2>
+<div class="why">🚩 Thin TS → annotate helpers. Playwright Essentials → flake strategy. This kit → app + TS tests + CI.</div>
+<div class="quiz-box"><details><summary>Where is deep flake strategy taught?</summary><p class="quiz-correct">Playwright Essentials.</p></details></div>
+<div class="mark"><button type="button" onclick="toggleSection(2)">Mark Complete</button></div>
+
+<h2 id="s3">3. Config + webServer</h2>
+<div class="why">🚩 <code>webServer.url</code> waits on <code>/api/health</code>; <code>workers: 1</code> for shared in-memory store.</div>
+<pre><code>webServer: { command: "npm start", url: "…/api/health" }</code></pre>
+<div class="quiz-box"><details><summary>Why one worker?</summary><p class="quiz-correct">In-memory store isn't multi-process safe.</p></details></div>
+<div class="mark"><button type="button" onclick="toggleSection(3)">Mark Complete</button></div>
+
+<h2 id="s4">4. API request tests</h2>
+<div class="why">🚩 <code>tests/api/tasks.api.spec.ts</code> — health, bad login, CRUD, owner isolation. Helpers in <code>tests/helpers/board.ts</code>.</div>
+<div class="quiz-box"><details><summary>How many Alice tasks after seed?</summary><p class="quiz-correct">3</p></details><details><summary>HTTP status for bad password?</summary><p class="quiz-correct">401</p></details></div>
+<div class="mark"><button type="button" onclick="toggleSection(4)">Mark Complete</button></div>
+
+<h2 id="s5">5. E2E + typed page helper</h2>
+<div class="why">🚩 <code>BoardPage</code> class — light POM habit, not a framework requirement.</div>
+<pre><code>export class BoardPage {
+  constructor(readonly page: Page) {}
+  async login(username: string, password: string): Promise&lt;void&gt; { … }
+}</code></pre>
+<div class="quiz-box"><details><summary>Locator for login submit?</summary><p class="quiz-correct">#loginBtn</p></details></div>
+<div class="mark"><button type="button" onclick="toggleSection(5)">Mark Complete</button></div>
+
+<h2 id="s6">6. HTML reporter</h2>
+<div class="why">🚩 Report folder: <code>playwright-report/</code> — CI uploads it as an artifact.</div>
+<div class="quiz-box"><details><summary>Local command to open report?</summary><p class="quiz-correct">npm run test:report</p></details></div>
+<div class="mark"><button type="button" onclick="toggleSection(6)">Mark Complete</button></div>
+
+<h2 id="s7">7. GitHub Actions CI</h2>
+<div class="why">🚩 <code>npm ci</code> → <code>npm run build</code> → install Chromium → <code>npm test</code> → upload report.</div>
+<pre><code>.github/workflows/ci.yml</code></pre>
+<div class="quiz-box"><details><summary>Does CI typecheck?</summary><p class="quiz-correct">Yes — via npm run build.</p></details></div>
+<div class="mark"><button type="button" onclick="toggleSection(7)">Mark Complete</button></div>
+
+<h2 id="s8">8. Practice &amp; next</h2>
+<div class="why">🚩 Break a seed title → watch E2E fail → fix → green → open HTML report → optional push for CI artifact.</div>
+<div class="mark"><button type="button" onclick="toggleSection(8)">Mark Complete</button></div>
+
+<div id="cert" class="certificate locked"><h3>🏆 Part 3 Certificate</h3><p>Complete all 8 sections to unlock.</p></div>
+<footer>Phase B complete — show work in <a href="../automation-portfolio/">automation-portfolio</a></footer>
+<script>
+(function(){
+  const TOTAL=8,PREFIX='tdt3-sec-';
+  function done(){let n=0;for(let i=1;i<=TOTAL;i++)if(localStorage.getItem(PREFIX+i)==='1')n++;return n;}
+  window.updateProgress=function(){const n=done();document.getElementById('progressBar').textContent='📊 Progress: '+n+'/'+TOTAL+' sections ('+Math.round(100*n/TOTAL)+'%)';
+    const c=document.getElementById('cert');if(n>=TOTAL){c.classList.remove('locked');c.innerHTML='<h3>🏆 Phase B Complete!</h3><p>Develop + test in TypeScript — portfolio next.</p>';}};
+  window.toggleSection=function(i){const k=PREFIX+i;localStorage.setItem(k,localStorage.getItem(k)==='1'?'0':'1');updateProgress();};
+  window.toggleTheme=function(){const d=document.documentElement.classList.toggle('force-dark');localStorage.setItem('tdt3-theme',d?'dark':'light');
+    document.getElementById('themeBtn').textContent=d?'☀️ Light mode':'🌙 Dark mode';};
+  if(localStorage.getItem('tdt3-theme')==='dark'||(!localStorage.getItem('tdt3-theme')&&matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.classList.add('force-dark');document.getElementById('themeBtn').textContent='☀️ Light mode';}
+  updateProgress();
+})();
+</script>
+<!--P3H-END-->
+</body>
+</html>
