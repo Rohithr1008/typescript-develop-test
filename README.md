@@ -17,6 +17,7 @@ For learners who finished **Phase A** (JE → HTML/CSS Part 1 → thin TS → Pl
 | **Previous** | [HTML & CSS Essentials](../html-css-essentials/) Parts 2–3 (deeper FE) · Phase A thin TS ≠ enough |
 | **Not this kit** | Thin test-oriented TS → `typescript-for-testers` · Browser E2E pedagogy → [Playwright Essentials](../playwright-essentials/README.md) |
 | **Goal** | Ship a small TS app with Playwright (TS) + CI — develop+test literacy |
+| **Phase C (next, STUB)** | [React Essentials](../react-essentials/) — components, hooks light, styling |
 
 ---
 
@@ -71,6 +72,14 @@ CI: `.github/workflows/ci.yml` — build + Playwright on push/PR, uploads `playw
 | [`HANDOFF.md`](HANDOFF.md) | Conventions for humans/agents |
 | [`PART1_PLAN.md`](PART1_PLAN.md) / [`PART2_PLAN.md`](PART2_PLAN.md) / [`PART3_PLAN.md`](PART3_PLAN.md) | Section plans |
 | [`index.html`](index.html) | Offline hub |
+
+---
+
+### 🧭 What's next (Phase C)
+
+After this kit (and optionally [CSS Advanced](../css-advanced/)):
+
+→ **[React Essentials](../react-essentials/)** (STUB) — React basics, hooks light, CSS Modules / Tailwind · [`automation-tester-path` Phase C](../automation-tester-path/ROADMAP.md)
 
 ---
 
