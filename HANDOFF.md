@@ -1,6 +1,6 @@
 # 📌 Project Handoff — TypeScript Develop + Test
 
-> **Purpose:** Fresh session (human or AI) knows Phase B is **built**, what each part covers, and what not to duplicate.
+> **Purpose:** Fresh session (human or AI) knows Phase B is **built**, what each part covers, and how to run the app/tests.
 
 ---
 
@@ -8,12 +8,12 @@
 
 | | |
 |---|---|
-| **Status** | ✅ **Built** — Parts 1–3 shipped (three editions each) + runnable lab + CI |
-| **Curriculum** | Deeper TS → TaskBoard app → Playwright in TS |
+| **Status** | ✅ **BUILT** |
+| **Parts** | 3 (deeper TS · TaskBoard app · Playwright TS + CI) |
 | **Repo** | https://github.com/Rohithr1008/typescript-develop-test |
 | **Path** | `C:\Users\rohit\.cline\data\workspaces\chat\typescript-develop-test` |
 
-Do **not** expand into a full React bootcamp or second Playwright course. Link siblings instead.
+Coordinate with [`../automation-tester-path/ROADMAP.md`](../automation-tester-path/ROADMAP.md).
 
 ---
 
@@ -21,13 +21,13 @@ Do **not** expand into a full React bootcamp or second Playwright course. Link s
 
 Phase B kit: **deeper TypeScript → small TS app → Playwright in TypeScript → CI**.
 
-| Part | Focus | Lab tie-in |
-|---|---|---|
-| 1 | Deeper TypeScript (beyond thin tester kit) | Types used in `src/types.ts` |
-| 2 | TaskBoard Express + vanilla UI | `npm start` on port 3847 |
-| 3 | Playwright in TypeScript + GitHub Actions | `npm test` · `.github/workflows/ci.yml` |
+| Part | Focus |
+|---|---|
+| 1 | Deeper TypeScript (modules, async, generics, strict tsconfig, API unions) |
+| 2 | TaskBoard mini-app (Express + TS, Bearer auth, typed CRUD, vanilla UI) |
+| 3 | Playwright in TypeScript (E2E + API tests, HTML report, GitHub Actions) |
 
-**Pedagogy:** same family as JE / Playwright — three editions, ADHD/autistic-friendly chunks, why-it-matters.
+**Pedagogy:** three editions per part, ADHD/autistic-friendly chunks, why-it-matters, progress + certificate in study apps.
 
 ### Automation Tester Path
 
@@ -43,30 +43,16 @@ Phase B kit: **deeper TypeScript → small TS app → Playwright in TypeScript �
 
 ## 3. What's in the repo
 
-### Study materials (offline)
-
-| Part | Plain | Interactive | Study app | Context |
-|---|---|---|---|---|
-| 1 | `Typescript_develop_test_part1_with_examples.md` | `_interactive.md` | `_study_app.html` | `TYPESCRIPT_DEVELOP_TEST_PART1_CONTEXT.md` |
-| 2 | `_part2_*` | same pattern | same pattern | `PART2_CONTEXT.md` |
-| 3 | `_part3_*` | same pattern | same pattern | `PART3_CONTEXT.md` |
-
-Hub: `index.html` · entry: `START_HERE.md` · plans: `PART1_PLAN.md` … `PART3_PLAN.md`
-
-### Runnable lab
-
-| Piece | Location |
+| Area | Location |
 |---|---|
-| Types / store / auth | `src/types.ts`, `store.ts`, `auth.ts`, `seed.ts` |
-| Express server | `src/server.ts` |
-| Vanilla UI | `src/public/index.html`, `app.js` |
+| Hub | `index.html` |
+| Study apps | `Typescript_develop_test_partN_study_app.html` |
+| Markdown editions | `Typescript_develop_test_partN_{with_examples,interactive}.md` |
+| Context notes | `TYPESCRIPT_DEVELOP_TEST_PARTN_CONTEXT.md` |
+| App source | `src/` (types, store, seed, auth, server, public) |
+| Tests | `tests/api/`, `tests/e2e/`, `tests/helpers/board.ts` |
 | Playwright config | `playwright.config.ts` |
-| E2E | `tests/e2e/board.spec.ts` |
-| API | `tests/api/tasks.api.spec.ts` |
-| Helper | `tests/helpers/board.ts` |
 | CI | `.github/workflows/ci.yml` |
-
-Seed users: `alice / alice123` · `bob / bob123` · port `3847`
 
 ---
 
@@ -74,21 +60,36 @@ Seed users: `alice / alice123` · `bob / bob123` · port `3847`
 
 ```bash
 npm install
-npx playwright install chromium
-npm start              # dev server
+npm start              # TaskBoard at http://localhost:3847
 npm run build          # tsc + copy public
-npm test               # Playwright (webServer starts app)
-npm run test:report
+npm test               # Playwright (8 tests)
+npm run test:report    # open HTML report
 ```
+
+Seed: `alice / alice123` · `bob / bob123`
 
 ---
 
-## 5. Rules for agents
+## 5. Naming & conventions
 
-1. Keep thin TS vs Phase B distinction in any path copy.  
-2. Do not re-teach Playwright strategy — link [`../playwright-essentials/`](../playwright-essentials/).  
-3. Naming: `Typescript_develop_test_partN_{with_examples,interactive,study_app}.html`  
-4. CI pattern mirrors [`../automation-portfolio/`](../automation-portfolio/) — HTML report artifact upload.
+| File | Role |
+|---|---|
+| `Typescript_develop_test_partN_with_examples.md` | Plain |
+| `Typescript_develop_test_partN_interactive.md` | Interactive MD |
+| `Typescript_develop_test_partN_study_app.html` | Study app |
+| `PARTN_PLAN.md` | Plan |
+| `TYPESCRIPT_DEVELOP_TEST_PARTN_CONTEXT.md` | Context |
+
+Study-app localStorage: `tdtN-sec-K`, `tdtN-theme`.  
+Sentinels: `<!--PN-END-->`, `<!--PNI-END-->`, `<!--PNH-END-->`.
+
+---
+
+## 6. Rules for agents
+
+1. Thin TS kit ≠ this kit — keep the distinction in any path copy.  
+2. Do not re-teach Playwright pedagogy here — link to `playwright-essentials`.  
+3. Part 2 app is the test target for Part 3 — keep seed deterministic (`POST /api/reset`).  
 
 ---
 

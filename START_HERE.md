@@ -1,9 +1,8 @@
 # START HERE — TypeScript Develop + Test
 
-Calm entry for **Phase B**. Three parts: deeper TS → TaskBoard app → Playwright in TS + CI.
+Calm entry for **Phase B**. This kit is **built** — 3 parts × three editions + runnable TaskBoard + Playwright tests.
 
-**Path plan:** [`../automation-tester-path/ROADMAP.md`](../automation-tester-path/ROADMAP.md) · **Map:** [`../automation-tester-path/README.md`](../automation-tester-path/README.md)  
-**Hub:** [`index.html`](index.html)
+**Path plan:** [`../automation-tester-path/ROADMAP.md`](../automation-tester-path/ROADMAP.md) · **Map:** [`../automation-tester-path/README.md`](../automation-tester-path/README.md)
 
 ---
 
@@ -20,45 +19,51 @@ Finish **Phase A** first (or know you can skip):
 Then Phase B:
 
 6. HTML & CSS Parts 2–3 (deeper FE)  
-7. **This kit** — deeper TS · TaskBoard app · Playwright in TS · CI  
+7. **This kit** — deeper TS · small TS app · Playwright in TS · CI  
 
 ---
 
-## Study order (this kit)
+## Calm order (recommended)
 
-| Step | Part | What you do |
+| Step | What | Open |
 |---|---|---|
-| 1 | **Part 1** — Deeper TypeScript | Modules, async, generics, utilities, strict tsconfig, API unions, errors |
-| 2 | **Part 2** — TaskBoard app | Read + run `npm start` · explore typed CRUD + vanilla UI |
-| 3 | **Part 3** — Playwright in TS | `npm test` · read helpers/API tests · skim CI workflow |
-
-Open [`index.html`](index.html) and pick a study app, or preview `.md` files in VS Code (`Ctrl+Shift+V`).
+| 1 | Hub overview | [`index.html`](index.html) |
+| 2 | Part 1 — deeper TypeScript | [Study app](Typescript_develop_test_part1_study_app.html) or [interactive MD](Typescript_develop_test_part1_interactive.md) |
+| 3 | Part 2 — run TaskBoard | `npm install` → `npm start` → [study app](Typescript_develop_test_part2_study_app.html) |
+| 4 | Part 3 — test what you built | `npm test` → [study app](Typescript_develop_test_part3_study_app.html) |
 
 ---
 
-## Run the lab
+## Runnable app + tests
 
 ```bash
 npm install
-npx playwright install chromium   # first time only
-
-npm start          # http://localhost:3847 — alice/alice123 · bob/bob123
-npm test           # E2E + API tests (starts server automatically)
+npm start          # http://localhost:3847 — alice/alice123 or bob/bob123
+npm test           # Playwright API + E2E (8 tests)
 npm run test:report
 ```
 
-Study materials work offline. The lab needs Node 18+.
+Study materials work offline in the browser — no install required for the HTML/MD editions alone.
 
 ---
 
-## Scope reminder
+## What you get here
 
-| This kit | Not this kit |
+| Chunk | Why |
 |---|---|
-| Develop-oriented TS + small app + TS tests | Thin tester TS (`typescript-for-testers`) |
-| Light Playwright wiring against *your* app | Full Playwright pedagogy (`playwright-essentials`) |
-| CI snippet mirroring portfolio pattern | React/Next bootcamp |
+| Deeper TypeScript | Thin tester TS ≠ TS develop jobs |
+| Small TS app | Practice shipping, not only reading types |
+| Playwright in TS | Typed E2E against *your* app |
+| CI | Lint/test/build on every push |
 
 ---
 
-*Read a little → run the app → write/fix a test → next part when ready.*
+## Hub files
+
+- [`HANDOFF.md`](HANDOFF.md) — conventions for humans/agents  
+- [`README.md`](README.md) — full map  
+- [`PART1_PLAN.md`](PART1_PLAN.md) / [`PART2_PLAN.md`](PART2_PLAN.md) / [`PART3_PLAN.md`](PART3_PLAN.md)  
+
+---
+
+*Phase B built — show work next in [`automation-portfolio`](../automation-portfolio/).*
